@@ -1,0 +1,92 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		
+		<title>REGISTRE/BUSQUEDA</title>
+		<script>
+		$(function(){
+			$("#guardardades").click(function(){
+				var fTEXT = $("#TEXT").val();
+				
+				$("#TEXT").val(" ");
+				
+				 $.ajax({type: "POST",
+						url:"http://www.grupllobet.com/apptest/phptest/reg.php",
+						data:({TEXT: fTEXT}),
+						cache: false,
+						dataType: "text",
+						success: Enviar
+					});
+				});
+			$("#buscardades").click(function(){
+				var fID = $("#ID").val();
+							
+				$("#ID").val(" ");
+				
+				
+				 $.ajax({type: "POST",
+						url:"http://www.grupllobet.com/apptest/phptest/ver_usuario.php",
+						data:({ID: fID}),
+						cache: false,
+						dataType: "text",
+						success: Buscar
+					})
+				});
+			
+				function Enviar(data){
+					alert(data+"Formulari enviat");
+					//$.mobile.changePage("#page3",{transition: "slideup", role:"dialog"});
+				}
+				
+				function Buscar(data){
+					alert(data);
+					//$.mobile.changePage("#page4",{transition: "slideup", role:"dialog"});
+					
+				}
+			});
+		</script>
+	</head>
+	<body style="background-color:gray">
+	<div data-role="page" id="page2" style="background-color:gray">	
+		<div data-role="fieldcontain">
+			<center><h1>REGISTRE</h1>
+			<form method="POST">
+				<table>
+				<tr>
+					<td><label>TEXT:</label></td> 
+					<td><input type="text" name="TEXT" id="TEXT" value=""></td>
+				</tr>
+				<tr>
+					<td><button type="button" id="guardardades">OK</button></td>
+				</tr>
+				</table>
+			</form>
+			</center>
+		</div>
+		
+		<div data-role="fieldcontain">	
+			<center><h1>BUSCAR</h1>
+			<form method="POST">
+				<table>
+				<tr>
+					<td><label>ID:</label></td> 
+					<td><input type="text" name="ID" id="ID"></td>
+				</tr>
+				<tr>
+					<td><button type="button" id="buscardades">Buscar</button></td>
+				</tr>
+				</table>
+			</form>
+			</center>	
+		</div>
+		<!--<div data-role="page" id="page3">
+			Formulari enviat correctament
+		</div>
+		<div data-role="page" id="page4">
+	
+		</div>-->
+	</div>	
+	</body>
+</html>
